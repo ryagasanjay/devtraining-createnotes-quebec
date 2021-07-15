@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Portal Configuration" max_length="40" name="x_snc_createnotes_portal_configuration" sizeclass="3" type="collection">
+        <element choice="1" label="Configuration Type" max_length="40" name="configuration_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Menus" value="Menus"/>
+            </choice>
+        </element>
+        <element choice="1" label="Menus with Tables" max_length="40" name="menus_with_tables" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Attestation" value="attestation"/>
+                <element inactive_on_update="false" label="Catalog Items" value="sc_cat_item"/>
+                <element inactive_on_update="false" label="Documentation" value="documentation"/>
+            </choice>
+        </element>
+    </element>
+</database>

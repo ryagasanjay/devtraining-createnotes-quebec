@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function(spUtil,$location) {
+  /* widget controller */
+	var c = this;
+	c.active = "Documentation"; 
+	c.idx = 0;
+	//spUtil.addInfoMessage(c.idx);
+	c.showAlert = function(menu,idx){
+		c.active = menu;
+		//spUtil.addInfoMessage("something " + menu + '\n ' + idx);
+		c.idx = idx;
+	};
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance_vlist</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>sys_name,table,field_list,filter,display_field,url,sp_page,maximum_entries</field_list>
+        <has_preview>true</has_preview>
+        <id>menu_unordered_list</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Menu Unordered List</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	//data.sp_page = $sp.getDisplayValue('sp_page'); // gets the page's ID
+	var menu_list=[],menu_fields=[];
+	var menus = new GlideRecord('x_snc_createnotes_portal_configuration');
+	menus.addEncodedQuery("configuration_type=Menus");
+	menus.query();
+	while (menus.next()) {
+		menu_list.push(menus.getDisplayValue('menus_with_tables'));
+		menu_fields.push(menus.getValue('menus_with_tables'));
+}
+	data.menu_list = menu_list;
+	data.menuobj = menu_fields;
+	
+	if (!options.table)
+		return;
+	
+	data.sp_page = $sp.getDisplayValue('sp_page'); // gets the page's ID
+	var gr = new GlideRecordSecure(options.table); 
+	if (options.filter)
+		gr.addEncodedQuery(options.filter);
+
+	if (options.order_direction == "asc")
+		gr.orderBy(options.order_by);
+	else
+		gr.orderByDesc(options.order_by);
+
+	gr.setLimit(options.maximum_entries);
+	gr.query();
+	data.list = [];
+	while (gr.next()) {
+		var record = {};
+		record.sys_id = gr.getValue('sys_id');
+		if (options.display_field)
+			record.display_field = gr.getDisplayValue(options.display_field);
+
+		if (data.sp_page)
+			record.url = "?id=" + data.sp_page + "&table=" + options.table + "&sys_id=" + record.sys_id + "&view=sp";
+		else
+			record.url = "";
+
+		data.list.push(record);
+	}
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-14 15:17:06</sys_created_on>
+        <sys_id>8a0eea962f513010d3e14ae72799b628</sys_id>
+        <sys_mod_count>226</sys_mod_count>
+        <sys_name>Menu Unordered List</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_8a0eea962f513010d3e14ae72799b628</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-15 15:46:04</sys_updated_on>
+        <template><![CDATA[ <div class="container">
+   <!--
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#Documentation">${Documentation}</a></li>
+		<li ><a data-toggle="tab" href="#Attestation">${Attestation}</a></li>
+    <li ><a data-toggle="tab" href="#CatalogItems">${Catalog Items}</a></li>
+  </ul>
+    -->
+
+
+
+    <ul class="nav nav-tabs">
+    <li ng-repeat="menu in data.menu_list"  ng-class="{'active': menu == c.active}" >
+      <a data-toggle="tab" id="{{menu}}" href="" ng-click="c.showAlert(menu,$index)">
+        {{menu}}
+      </a>
+     </li>
+  </ul>     
+    <div  ng-if="c.idx == 0" id="Documentation" class="tab-pane active">
+      <h3>Menu 2 Documentation</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div  ng-if="c.idx == 1" id="Attestation" class="tab-pane ">
+      <h3>Menu 3 Attestation</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+     <!-- <div ng-if="c.idx == 2" id="CatalogItems" class="tab-pane ">
+      <h3>Menu 3 CatalogItems</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div> -->
+    
+     <div ng-show="c.idx == 2" id="CatalogItems" class="tab-pane">
+
+      <h3>{{options.title}}</h3>
+      <ul class="list-group" >
+        <li ng-repeat="item in data.list" class="list-group-item">
+          <a ng-href="{{item.url}}">
+            {{item.display_field}}
+          </a>
+        </li>
+      </ul>  
+    </div>
+    
+    
+  </div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_vlist">
+    <sp_instance_vlist action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <display_field>name</display_field>
+        <field_list/>
+        <filter table="sc_cat_item">type!=bundle^sys_class_name!=sc_cat_item_guide^type!=package^sys_class_name!=sc_cat_item_content^published_refISEMPTY^category=2809952237b1300054b6a3549dbe5dd4<item display_value="Bundle" endquery="false" field="type" goto="false" newquery="false" operator="!=" or="false" value="bundle"/>
+            <item display_value="Order guide" endquery="false" field="sys_class_name" goto="false" newquery="false" operator="!=" or="false" value="sc_cat_item_guide"/>
+            <item display_value="Package" endquery="false" field="type" goto="false" newquery="false" operator="!=" or="false" value="package"/>
+            <item display_value="Content Item" endquery="false" field="sys_class_name" goto="false" newquery="false" operator="!=" or="false" value="sc_cat_item_content"/>
+            <item endquery="false" field="published_ref" goto="false" newquery="false" operator="ISEMPTY" or="false" value=""/>
+            <item display_table="sc_category" display_value="Software" endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="2809952237b1300054b6a3549dbe5dd4"/>
+        </filter>
+        <glyph/>
+        <id/>
+        <maximum_entries>5</maximum_entries>
+        <order>2</order>
+        <order_by/>
+        <order_direction>asc</order_direction>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">43295ae1094232007f44e1046c8ff615</sp_column>
+        <sp_page display_value="sc_cat_item">9f12251147132100ba13a5554ee490f4</sp_page>
+        <sp_widget display_value="Menu Unordered List">8a0eea962f513010d3e14ae72799b628</sp_widget>
+        <sys_class_name>sp_instance_vlist</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-14 16:42:21</sys_created_on>
+        <sys_id>0b814f9a2fd13010d3e14ae72799b64a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_instance_vlist_0b814f9a2fd13010d3e14ae72799b64a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-14 18:15:18</sys_updated_on>
+        <table>sc_cat_item</table>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </sp_instance_vlist>
+    <sys_translated_text action="delete_multiple" query="documentkey=0b814f9a2fd13010d3e14ae72799b64a"/>
+</record_update>
